@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
+//  WeeklyViewController.swift
 //  CalendarExampleTutorial
 //
-//  Created by Debby on 2022/08/18.
-//  Lecture : https://www.youtube.com/watch?v=abbWOYFZd68
+//  Created by Debby on 2022/08/22.
+//  Lecture : https://www.youtube.com/watch?v=E-bFeJLsvW0&t=52s
 
 /*
  MARK: - UIColors Memo
@@ -15,7 +15,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class WeeklyViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     // MARK: - @IBOutlet
     @IBOutlet weak var yearLabel: UILabel!
@@ -23,7 +23,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var collectionView: UICollectionView!
     
     var selectedDate = Date() // 선택한 날짜, 디폴트 : 오늘
-    var totalSquares = [String]()
+    var totalSquares = [Date]() // 날짜를 기준으로 표시
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
@@ -40,9 +40,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calCell", for: indexPath) as! CalendarCell
         
-        cell.dayOfMonth.text = totalSquares[indexPath.item]
+        let date = totalSquares[indexPath.item]
+        cell.dayOfMonth.text = String(CalendarHelper().dayOfMonth(date: date))
         
+        if (date == selectedDate) {
+            cell.layer.cornerRadius = 6.0
+            cell.layer.borderWidth = 2.5
+            cell.layer.borderColor = UIColor.systemIndigo.cgColor
+        } else {
+            cell.backgroundColor = UIColor.white
+        }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedDate = totalSquares[indexPath.item]
+        collectionView.reloadData()
     }
     
     // MARK: - Custom Functions
@@ -56,31 +69,28 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func setMonthView() {
         totalSquares.removeAll()
-        let daysInMonth = CalendarHelper().daysInMonth(date: selectedDate)
-        let firstDayOfMonth = CalendarHelper().firstOfMonth(date: selectedDate)
-        let startingSpaces = CalendarHelper().weekDay(date: firstDayOfMonth)
-        var count: Int = 1
-        while (count <= 42) {
-            if (count <= startingSpaces || count - startingSpaces > daysInMonth) {
-                totalSquares.append("")
-            } else {
-                totalSquares.append(String(count - startingSpaces)) // blank 처리 되어야 하는 셀
-            }
-            count += 1
+        
+        var current = CalendarHelper().sundayForDate(date: selectedDate)
+        let nextSunday = CalendarHelper().addDays(date: current, days: 7)
+        
+        while (current < nextSunday) {
+            totalSquares.append(current)
+            current = CalendarHelper().addDays(date: current, days: 1)
         }
+        
         monthLabel.text = CalendarHelper().monthString(date: selectedDate)
         yearLabel.text = CalendarHelper().yearString(date: selectedDate)
         collectionView.reloadData()
     }
     
     // MARK: - @IBAction
-    @IBAction func previousMonth(_ sender: Any) {
-        selectedDate = CalendarHelper().minusMonth(date: selectedDate)
+    @IBAction func previousWeek(_ sender: Any) {
+        selectedDate = CalendarHelper().addDays(date: selectedDate, days: -7)
         setMonthView()
     }
-    
-    @IBAction func nextMonth(_ sender: Any) {
-        selectedDate = CalendarHelper().plusMonth(date: selectedDate)
+       
+    @IBAction func nextWeek(_ sender: Any) {
+        selectedDate = CalendarHelper().addDays(date: selectedDate, days: 7)
         setMonthView()
     }
     override var shouldAutorotate: Bool {

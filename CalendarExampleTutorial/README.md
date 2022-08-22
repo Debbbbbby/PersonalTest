@@ -3,5 +3,11 @@
 ## 220819
 ### Make Monthly Calendar
 <p align="center">
-<img src="https://user-images.githubusercontent.com/108422901/185627403-80c495f5-aea9-4158-9de1-11a79f97901c.gif">
+<img width="330px" src="https://user-images.githubusercontent.com/108422901/185627403-80c495f5-aea9-4158-9de1-11a79f97901c.gif">
+</p>
+
+## 220822
+### Make Weekly Calendar : Weekly View
+<p align="center">
+<img width="330px" src="https://media0.giphy.com/media/TnmIxNZXklvnXgtIql/giphy.gif?cid=790b761170cd1df6adb86804029bdde46656be1d3288acfa&rid=giphy.gif&ct=g">
 </p>

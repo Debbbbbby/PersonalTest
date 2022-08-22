@@ -15,6 +15,7 @@
 		86A9380628AE72300001E4E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86A9380528AE72300001E4E2 /* Assets.xcassets */; };
 		86A9380928AE72300001E4E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86A9380728AE72300001E4E2 /* LaunchScreen.storyboard */; };
 		86A9381128AE7A520001E4E2 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A9381028AE7A520001E4E2 /* CalendarCell.swift */; };
+		86F1053C28B348F9007F9763 /* WeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F1053B28B348F9007F9763 /* WeeklyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		86A9380828AE72300001E4E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86A9380A28AE72300001E4E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86A9381028AE7A520001E4E2 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		86F1053B28B348F9007F9763 /* WeeklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				86A9380528AE72300001E4E2 /* Assets.xcassets */,
 				86A9380728AE72300001E4E2 /* LaunchScreen.storyboard */,
 				86A9380A28AE72300001E4E2 /* Info.plist */,
+				86F1053B28B348F9007F9763 /* WeeklyViewController.swift */,
 			);
 			path = CalendarExampleTutorial;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				8627EC5328AF82C500EA9A2E /* CalendarHelper.swift in Sources */,
 				86A9380128AE72300001E4E2 /* ViewController.swift in Sources */,
 				86A937FD28AE72300001E4E2 /* AppDelegate.swift in Sources */,
+				86F1053C28B348F9007F9763 /* WeeklyViewController.swift in Sources */,
 				86A937FF28AE72300001E4E2 /* SceneDelegate.swift in Sources */,
 				86A9381128AE7A520001E4E2 /* CalendarCell.swift in Sources */,
 			);

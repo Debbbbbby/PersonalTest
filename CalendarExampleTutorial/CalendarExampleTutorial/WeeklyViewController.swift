@@ -48,7 +48,7 @@ class WeeklyViewController: UIViewController, UICollectionViewDelegate, UICollec
             cell.layer.borderWidth = 2.5
             cell.layer.borderColor = UIColor.systemIndigo.cgColor
         } else {
-            cell.backgroundColor = UIColor.white
+            cell.layer.borderColor = UIColor.clear.cgColor
         }
         return cell
     }

@@ -15,21 +15,23 @@
 
 import UIKit
 
-class WeeklyViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+var selectedDate = Date() // 선택한 날짜, 디폴트 : 오늘
+
+class WeeklyViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - @IBOutlet
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     
-    var selectedDate = Date() // 선택한 날짜, 디폴트 : 오늘
     var totalSquares = [Date]() // 날짜를 기준으로 표시
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         setCellsView()
-        setMonthView()
+        setWeekView()
     }
     
     // MARK: - CollectionView Setting
@@ -39,13 +41,13 @@ class WeeklyViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "calCell", for: indexPath) as! CalendarCell
+        cell.layer.cornerRadius = 6.0
+        cell.layer.borderWidth = 2.5
         
         let date = totalSquares[indexPath.item]
         cell.dayOfMonth.text = String(CalendarHelper().dayOfMonth(date: date))
         
         if (date == selectedDate) {
-            cell.layer.cornerRadius = 6.0
-            cell.layer.borderWidth = 2.5
             cell.layer.borderColor = UIColor.systemIndigo.cgColor
         } else {
             cell.layer.borderColor = UIColor.clear.cgColor
@@ -56,6 +58,7 @@ class WeeklyViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedDate = totalSquares[indexPath.item]
         collectionView.reloadData()
+        tableView.reloadData()
     }
     
     // MARK: - Custom Functions
@@ -67,7 +70,7 @@ class WeeklyViewController: UIViewController, UICollectionViewDelegate, UICollec
         flowLayout.itemSize = CGSize(width: width, height: height)
     }
     
-    func setMonthView() {
+    func setWeekView() {
         totalSquares.removeAll()
         
         var current = CalendarHelper().sundayForDate(date: selectedDate)
@@ -81,20 +84,47 @@ class WeeklyViewController: UIViewController, UICollectionViewDelegate, UICollec
         monthLabel.text = CalendarHelper().monthString(date: selectedDate)
         yearLabel.text = CalendarHelper().yearString(date: selectedDate)
         collectionView.reloadData()
+        tableView.reloadData()
     }
     
     // MARK: - @IBAction
     @IBAction func previousWeek(_ sender: Any) {
         selectedDate = CalendarHelper().addDays(date: selectedDate, days: -7)
-        setMonthView()
+        setWeekView()
     }
        
     @IBAction func nextWeek(_ sender: Any) {
         selectedDate = CalendarHelper().addDays(date: selectedDate, days: 7)
-        setMonthView()
+        setWeekView()
     }
-    override var shouldAutorotate: Bool {
-        return false
+    
+    // MARK: - tableView Setting
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("tableView - numberOfRowsInSection")
+        return Event().eventsForDate(date: selectedDate).count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("tableView - cellForRowAt")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID") as! EventCell
+        let event = Event().eventsForDate(date: selectedDate)[indexPath.row]
+        cell.eventLabel.text = event.name + " " + CalendarHelper().timeString(date: event.date)
+        
+        return cell
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
 }
 
+/*
+ Collection View Cell 이 찌그러져서 추가한 임시방편
+ https://velog.io/@seondal/iOS-Collection-View-Cell-%ED%81%AC%EA%B8%B0%EB%A5%BC-%EC%BB%A8%ED%85%90%EC%B8%A0%EC%97%90-%EB%94%B0%EB%9D%BC-%EB%B0%94%EB%80%8C%EA%B2%8C-%ED%95%98%EA%B8%B0
+ */
+extension WeeklyViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 50, height: 50)
+    }
+}

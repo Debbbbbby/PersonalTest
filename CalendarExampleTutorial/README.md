@@ -14,6 +14,10 @@
 
 ### Make Weekly Calendar : Fixed The Error
 <p align="center">
-<img width="330px" src="https://media2.giphy.com/media/0vykyyuAUyQcXcPYTI/giphy.gif">
+<img width="330px" src="https://media2.giphy.com/media/lHT6rpoiWHiKjJfz10/giphy.gif?cid=790b7611d1ed062238e1a79fef4e876c5951416420926a66&rid=giphy.gif&ct=g">
 </p>
 
+### Make Weekly Calendar : Not working yet
+<p align="center">
+<img width="330px" src="https://media2.giphy.com/media/znDMvhGDycmlTNvk7E/giphy.gif?cid=790b7611d649ba00817b0ef4c2031061db1262452c6cf9e6&rid=giphy.gif&ct=g">
+</p>

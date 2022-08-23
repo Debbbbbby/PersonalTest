@@ -30,6 +30,11 @@ class CalendarHelper{
         dateFormatter.dateFormat = "yyyy"
         return dateFormatter.string(from: date)
     }
+    func timeString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
+    }
     
     func daysInMonth(date: Date) -> Int {
         let range = calendar.range(of: .day, in: .month, for: date)!

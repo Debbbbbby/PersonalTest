@@ -18,5 +18,10 @@
 - 강의명 : KXC 강의 들은 후 직접 카톡 내 프로필 화면 레이아웃 구현해보기
 - 간단설명 : 유준용님 과외 과제, 화면을 돌려도 깨지지 않게 구현해보기
 
+## [enurytime](https://github.com/Debbbbbby/PersonalTest/tree/main/enurytime)
+- 강의명 : 클론 코딩 - iOS 앱 '에누리타임' 개발하기
+- 간단설명 : 에브리타임 앱 클론 코딩해보기
+
 ## images
 - 간단설명 : 이미지 모음 폴더
+

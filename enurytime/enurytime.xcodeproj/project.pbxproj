@@ -16,6 +16,7 @@
 		065D796126E3A4B50066F8D4 /* enurytimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D796026E3A4B50066F8D4 /* enurytimeTests.swift */; };
 		065D796C26E3A4B60066F8D4 /* enurytimeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D796B26E3A4B60066F8D4 /* enurytimeUITests.swift */; };
 		864FD97928D3188200FDE175 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FD97828D3188200FDE175 /* LoginViewController.swift */; };
+		86B2DDFB28D32D7D0041B4CA /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B2DDFA28D32D7D0041B4CA /* InsetTextField.swift */; };
 		86F4812328D3170C00F08E6A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4812228D3170C00F08E6A /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		065D796B26E3A4B60066F8D4 /* enurytimeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enurytimeUITests.swift; sourceTree = "<group>"; };
 		065D796D26E3A4B60066F8D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		864FD97828D3188200FDE175 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		86B2DDFA28D32D7D0041B4CA /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
 		86F4812228D3170C00F08E6A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 				065D795726E3A4B50066F8D4 /* Info.plist */,
 				86F4812228D3170C00F08E6A /* UIColor+Extension.swift */,
 				864FD97828D3188200FDE175 /* LoginViewController.swift */,
+				86B2DDFA28D32D7D0041B4CA /* InsetTextField.swift */,
 			);
 			path = enurytime;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				065D794C26E3A4B30066F8D4 /* SceneDelegate.swift in Sources */,
 				864FD97928D3188200FDE175 /* LoginViewController.swift in Sources */,
 				86F4812328D3170C00F08E6A /* UIColor+Extension.swift in Sources */,
+				86B2DDFB28D32D7D0041B4CA /* InsetTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

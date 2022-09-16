@@ -1,10 +1,3 @@
-//
-//  InsetTextField.swift
-//  enurytime
-//
-//  Created by Debby on 2022/09/15.
-//
-
 import Foundation
 import UIKit
 
@@ -26,7 +19,6 @@ class InsetTextField: UITextField {
         return bounds.insetBy(dx: insetX, dy: insetY) // 기존 inset값을 바꿔준다.
     }
     
-    //
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: insetX, dy: insetY)
     }

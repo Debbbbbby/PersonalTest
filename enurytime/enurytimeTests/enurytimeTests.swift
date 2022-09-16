@@ -1,10 +1,3 @@
-//
-//  enurytimeTests.swift
-//  enurytimeTests
-//
-//  Created by sesang on 2021/09/04.
-//
-
 import XCTest
 @testable import enurytime
 

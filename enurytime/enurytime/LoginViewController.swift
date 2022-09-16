@@ -1,10 +1,3 @@
-//
-//  LoginViewController.swift
-//  enurytime
-//
-//  Created by Debby on 2022/09/15.
-//
-
 import Foundation
 import UIKit
 
@@ -94,6 +87,8 @@ final class LoginViewController: UIViewController {
         return stackView
     }()
     
+    private var centerYConstraint: NSLayoutConstraint? //중앙 정렬 제약조건을 키보드 입력 시 변경해주기 위해 따로 프로퍼티로 생성
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -114,10 +109,14 @@ final class LoginViewController: UIViewController {
         
         self.container.setCustomSpacing(30, after: self.loginButton)
         
+        let constraint = self.container.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        
         NSLayoutConstraint.activate([
             self.container.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50),
             self.container.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -50),
-            self.container.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            
+            //self.container.centerYAnchor.constraint(equalTo: self.view.centerYAnchor), // stackView의 중앙 정렬 제약조건을 constraint라는 변수로 처리
+            constraint,
             
             self.titleImageView.heightAnchor.constraint(equalToConstant: 60),
             self.titleImageView.widthAnchor.constraint(equalToConstant: 60),
@@ -133,7 +132,61 @@ final class LoginViewController: UIViewController {
             self.loginButton.leadingAnchor.constraint(equalTo: self.container.leadingAnchor),
             self.loginButton.trailingAnchor.constraint(equalTo: self.container.trailingAnchor),
             self.loginButton.heightAnchor.constraint(equalToConstant: 40),
-            
         ])
+        
+        self.centerYConstraint = constraint
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewDIdTap)) // 아래 @objc viewDIdTap()
+        self.view.addGestureRecognizer(tapGesture)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // 뷰가 클릴될 때 강제로 editing을 멈추게 하기
+    @objc func viewDIdTap(gesture: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+            return
+        }
+        let keyboardHeight = keyboardFrame.height
+        UIView.animate(withDuration: duration) { // 애니메이션 처리
+            [self.titleImageView, self.descriptionLabel, self.titleLabel, self.signupButton].forEach { view in
+                view.alpha = 0 // 로고, 타이틀, 설명, 회원가입 버튼 투명도 0
+            }
+            self.centerYConstraint?.constant = -keyboardHeight
+            self.view.layoutIfNeeded()
+        }
+        self.centerYConstraint?.constant = -keyboardHeight
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {
+            return
+        }
+        UIView.animate(withDuration: duration) { // 애니메이션 처리
+            [self.titleImageView, self.descriptionLabel, self.titleLabel, self.signupButton].forEach { view in
+                view.alpha = 1 // 로고, 타이틀, 설명, 회원가입 버튼 다시 보이게 설정
+            }
+            self.centerYConstraint?.constant = 0
+            self.view.layoutIfNeeded()
+        }
+        
+    }
+    
 }

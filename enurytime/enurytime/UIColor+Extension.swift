@@ -1,10 +1,3 @@
-//
-//  UIColor+Extension.swift
-//  enurytime
-//
-//  Created by Debby on 2022/09/15.
-//
-
 import Foundation
 import UIKit
 
